@@ -55,12 +55,12 @@
   #bgstack .bgimg.on{opacity:1;transform:scale(1.015)}
   /* b1 波光水面：柔光，承托题/引文 */
   #bgstack .b1{background-image:var(--bg1);background-position:center 45%}
-  /* b2「Blue is the universal Love.」海报（第8页）：减滤镜——提亮提饱和，保留柔化去字 */
+  /* b2「Blue is the universal Love.」海报（第8页）：减滤镜更明显——提亮提饱和、少模糊 */
   #bgstack .b2{background-image:var(--bg2);background-position:center 45%;background-size:cover;
-    filter:blur(26px) saturate(.74) brightness(.44) contrast(1.10) hue-rotate(-5deg)}
-  /* b3「Klein BLUE COOL LOVE」海报（第3/7页）：减滤镜——提亮提饱和，保留重度柔化去大字 */
+    filter:blur(15px) saturate(.84) brightness(.62) contrast(1.12) hue-rotate(-5deg)}
+  /* b3「Klein BLUE COOL LOVE」海报（第3/7页）：减滤镜更明显——提亮提饱和、少模糊 */
   #bgstack .b3{background-image:var(--bg3);background-position:center 46%;background-size:cover;
-    filter:blur(40px) saturate(.72) brightness(.46) contrast(1.08) hue-rotate(-5deg)}
+    filter:blur(22px) saturate(.82) brightness(.60) contrast(1.10) hue-rotate(-5deg)}
   /* b4 蓝白抽象水彩 */
   #bgstack .b4{background-image:var(--bg4);background-position:center 52%;
     filter:brightness(.42) saturate(.6) contrast(1.12) hue-rotate(-5deg)}
@@ -71,7 +71,10 @@
   #bgstack .b6{background-image:var(--bg6);background-position:center 50%;
     filter:brightness(.56) saturate(.62) contrast(1.1) hue-rotate(-5deg)}
   /* 克莱因蓝统一色相层 + 呼吸光斑 */
-  #bgstack .tint{position:absolute;inset:0;background:#002FA7;mix-blend-mode:color;opacity:.76;pointer-events:none}
+  #bgstack .tint{position:absolute;inset:0;background:#002FA7;mix-blend-mode:color;opacity:.76;pointer-events:none;
+    transition:opacity 1.1s ease}
+  /* 海报页：调淡色相层，让原图更明显 */
+  body.on-poster #bgstack .tint{opacity:.46}
   #bgstack .wash{position:absolute;inset:0;pointer-events:none;
     background:radial-gradient(90% 62% at 22% 26%,rgba(58,99,255,.14),transparent 62%),
       radial-gradient(76% 58% at 82% 74%,rgba(10,46,204,.26),transparent 66%)}
@@ -323,8 +326,8 @@
     #sound{width:36px;height:36px}
     #hud{font-size:12px}#hud b{font-size:19px}
     pre.style-pre,pre.poem-pre{max-width:100%}
-    #bgstack .b2{filter:blur(18px) saturate(.74) brightness(.48) contrast(1.08) hue-rotate(-5deg)}
-    #bgstack .b3{filter:blur(30px) saturate(.72) brightness(.50) contrast(1.06) hue-rotate(-5deg)}
+    #bgstack .b2{filter:blur(11px) saturate(.84) brightness(.66) contrast(1.10) hue-rotate(-5deg)}
+    #bgstack .b3{filter:blur(16px) saturate(.82) brightness(.64) contrast(1.08) hue-rotate(-5deg)}
     #bgstack .b4{filter:brightness(.40) saturate(.6) contrast(1.10) hue-rotate(-5deg)}
     #bgstack .b5{filter:blur(1px) brightness(.42) saturate(.6) contrast(1.10) hue-rotate(-5deg)}
   }
@@ -651,6 +654,8 @@ Not until I met you did I call it fate</pre>
     /* 底图交叉淡切 */
     var bi=BGMAP[i]||0;
     bgs.forEach(function(b,k){ b.classList.toggle('on',k===bi); });
+    /* 海报底图（b2/b3：第8 / 第3·7页）时，调淡全局色相层让原图更明显 */
+    document.body.classList.toggle('on-poster', bi===1 || bi===2);
     cur=i;
     if(idxEl) idxEl.textContent=String(i+1).padStart(2,'0');
     if(prog) prog.style.width=((i+1)/pages.length*100).toFixed(2)+'%';
