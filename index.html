@@ -155,6 +155,7 @@
   /* ---------- 正文 ---------- */
   main{max-width:880px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
   section{padding:15vh 0;position:relative}
+  section[data-n="05"]{padding-bottom:5vh}
   section[data-n]::before{content:attr(data-n);position:absolute;right:-6px;top:6vh;z-index:-1;
     font-family:"Cormorant Garamond",serif;font-weight:300;font-size:clamp(90px,15vw,176px);line-height:.8;
     color:rgba(150,178,255,.055);letter-spacing:-.02em;pointer-events:none;user-select:none}
@@ -185,9 +186,12 @@
     color:#d9e2ff;text-align:center;line-height:1.7;max-width:760px;margin:0 auto;
     text-shadow:0 1px 2px rgba(0,8,31,.4),0 3px 30px rgba(0,8,31,.6)}
 
-  pre.poem-pre{font-family:"Noto Serif SC","Cormorant Garamond",serif;font-weight:700;font-size:clamp(20px,3.4vw,36px);line-height:1.62;
-    color:#fff;white-space:pre-wrap;letter-spacing:.05em;max-width:none;
+  pre.poem-pre{font-family:"Noto Serif SC","Cormorant Garamond",serif;font-weight:700;font-size:clamp(20px,3.4vw,36px);line-height:1.95;
+    color:#fff;white-space:pre-wrap;letter-spacing:.08em;max-width:none;text-align:left;
     text-shadow:0 1px 2px rgba(0,8,31,.45),0 3px 26px rgba(0,8,31,.55)}
+  .poem-pre .l{display:block}
+  .poem-pre .i1{padding-left:1.5em}
+  .poem-pre .i2{padding-left:3em}
   pre.style-pre{font-family:"Noto Sans SC";font-weight:400;font-size:clamp(17px,2.5vw,23px);line-height:1.9;
     color:#f4f7ff;white-space:pre-wrap;max-width:640px;letter-spacing:.02em;word-spacing:.05em;
     text-shadow:0 1px 2px rgba(0,8,31,.45),0 3px 24px rgba(0,8,31,.55)}
@@ -202,7 +206,7 @@
 
   /* 章节间视觉带：底图二，整版图块 */
   #band{position:relative;width:min(1080px,90vw);height:min(72vh,660px);min-height:400px;
-    margin:16vh auto;overflow:hidden;z-index:1}
+    margin:12vh auto;overflow:hidden;z-index:1}
   #band .inner{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;
     justify-content:center;padding:0 clamp(28px,7vw,88px)}
   #band .interlude{max-width:60%}
@@ -372,9 +376,7 @@
   <!-- 04 苦根 -->
   <section class="reveal" data-n="04">
     <div class="tag">VERSE <span class="cn">苦根</span></div>
-<pre class="poem-pre">泛青的苦根、
-           回憶的
-       苦恨</pre>
+<pre class="poem-pre"><span class="l">泛青的苦根、</span><span class="l i1">回憶的</span><span class="l i2">苦恨</span></pre>
   </section>
 
   <!-- 05 我的风格 -->
