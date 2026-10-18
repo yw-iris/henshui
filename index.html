@@ -241,6 +241,11 @@
   .poem-pre .l{display:block}
   .poem-pre .i1{padding-left:1.5em}
   .poem-pre .i2{padding-left:3em}
+  /* 第3页「苦根」横向排成一行 */
+  .page[data-n="03"] pre.poem-pre.row{white-space:normal;line-height:1.5;text-align:center}
+  .page[data-n="03"] pre.poem-pre.row .l{display:inline;padding-left:0}
+  .page[data-n="03"] pre.poem-pre.row .i1{margin-left:.4em}
+  .page[data-n="03"] pre.poem-pre.row .i2{margin-left:.4em}
   .page[data-n="07"] pre.poem-pre{font-size:clamp(19px,3.05vw,33px);letter-spacing:.06em}
   pre.style-pre{font-family:"Noto Sans SC";font-weight:400;font-size:clamp(17px,2.4vw,23px);line-height:1.95;
     color:#f4f7ff;white-space:pre-wrap;max-width:640px;letter-spacing:.02em;word-spacing:.05em;
@@ -466,7 +471,7 @@
   <div class="page center" data-n="03">
     <div class="wrap">
       <div class="quote">唯闻人作鬼，不见鹤成仙</div>
-      <pre class="poem-pre" style="margin-top:clamp(26px,3.8vh,54px)"><span class="l">泛青的苦根、</span><span class="l i1">回憶的</span><span class="l i2">苦恨</span></pre>
+      <pre class="poem-pre row" style="margin-top:clamp(26px,3.8vh,54px)"><span class="l">泛青的苦根、</span><span class="l i1">回憶的</span><span class="l i2">苦恨</span></pre>
     </div>
   </div>
 
