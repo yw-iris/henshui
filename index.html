@@ -282,6 +282,7 @@
 </head>
 <body>
 
+<audio id="bgm" src="bgm.mp4" loop preload="metadata" playsinline hidden></audio>
 <div id="bg"></div>
 <div id="sea"></div>
 <div id="veil"></div>
@@ -289,7 +290,7 @@
 <div id="progress"></div>
 
 <div id="hud"><b id="hud-idx">00</b> / <span id="hud-total">09</span></div>
-<div id="sound" title="环境音" aria-label="环境音"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 17.5V5.2l9-1.7v12.3"/><circle cx="6.9" cy="17.6" r="2.6"/><circle cx="15.9" cy="15.8" r="2.6"/></svg></div>
+<div id="sound" title="背景音乐" aria-label="背景音乐"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 17.5V5.2l9-1.7v12.3"/><circle cx="6.9" cy="17.6" r="2.6"/><circle cx="15.9" cy="15.8" r="2.6"/></svg></div>
 <div id="spine">恨水 · HENSHUI · 也许我活着 为你刻写墓志铭</div>
 
 <!-- 封面 · 开场动画 -->
@@ -551,26 +552,16 @@ Not until I met you did I call it fate</pre>
     document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
   }
 
-  /* ---------- 环境音 ---------- */
-  var btn=document.getElementById('sound'), actx, on=false, nodes=[];
+  /* ---------- 背景音乐（BGM） ---------- */
+  var btn=document.getElementById('sound'), bgm=document.getElementById('bgm'), on=false;
+  bgm.volume=0.55;
   btn.addEventListener('click',function(){
-    if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)();
-    if(actx.state==='suspended') actx.resume();
     if(!on){
       on=true; btn.classList.add('on');
-      [110,164.81,220].forEach(function(f,i){
-        var o=actx.createOscillator(), g=actx.createGain();
-        o.type='sine'; o.frequency.value=f; g.gain.value=0;
-        o.connect(g); g.connect(actx.destination);
-        g.gain.linearRampToValueAtTime(0.045, actx.currentTime+2.5); o.start();
-        var lfo=actx.createOscillator(), lg=actx.createGain();
-        lfo.frequency.value=0.07+i*0.03; lg.gain.value=0.018;
-        lfo.connect(lg); lg.connect(g.gain); lfo.start();
-        nodes.push(o,lfo);
-      });
+      var p=bgm.play();
+      if(p&&p.catch){ p.catch(function(){ on=false; btn.classList.remove('on'); }); }
     } else {
-      on=false; btn.classList.remove('on');
-      nodes.forEach(function(n){ try{n.stop();}catch(e){} }); nodes=[];
+      on=false; btn.classList.remove('on'); bgm.pause();
     }
   });
 
