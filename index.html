@@ -267,6 +267,13 @@
   @media (prefers-reduced-motion:reduce){
     *{animation-duration:.01ms !important;transition-duration:.01ms !important}
   }
+
+  /* ---------- 里页飞鸟环绕（螺旋上升 3D 鸟群，参考 yuan 实现） ---------- */
+  #flock{position:fixed;inset:0;z-index:-1;pointer-events:none;perspective:1100px;overflow:hidden;
+    opacity:0;transition:opacity 2.2s ease .4s}
+  body.entered #flock{opacity:.92}
+  #fstage{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+  #fstage img{position:absolute;left:50%;top:50%;will-change:transform,opacity}
 </style>
 </head>
 <body>
@@ -324,6 +331,8 @@
   <h1 class="cover-title">恨水</h1>
   <div class="enter">轻触任意处<i></i>进入</div>
 </div>
+
+<div id="flock"><div id="fstage"></div></div>
 
 <main id="main">
 
@@ -564,6 +573,47 @@ Not until I met一一一一一一一一一一一一
       nodes.forEach(function(n){ try{n.stop();}catch(e){} }); nodes=[];
     }
   });
+
+  /* ---------- 里页飞鸟环绕：螺旋上升 3D 鸟群（参考 yuan 实现） ---------- */
+  (function(){
+    var stage=document.getElementById('fstage');
+    if(!stage) return;
+    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var svg="<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 60'><path d='M10 40C32 18 46 26 60 34C74 26 88 18 110 40C90 30 74 34 60 44C46 34 30 30 10 40Z' fill='#1f4ae0' stroke='rgba(190,215,255,.6)' stroke-width='1.4' stroke-linejoin='round'/></svg>";
+    var uri="data:image/svg+xml;base64,"+btoa(svg);
+    var N=innerWidth<600?8:12, k, birds=[];
+    for(k=0;k<N;k++){
+      var el=document.createElement('img'); el.src=uri; el.alt='';
+      var b={el:el,w:30+Math.random()*32,R:118+Math.random()*58,u:k/N,tw:(Math.random()*2-1)*0.14,ph:Math.random()*6.28};
+      b.rz=b.R*0.9; el.style.width=b.w+'px';
+      stage.appendChild(el); birds.push(b);
+    }
+    var VS=0.05, ROT=0.3, TWIST=2*Math.PI*1.3;
+    var px=0,py=0,tx=0,ty=0,t=0,last=0;
+    addEventListener('pointermove',function(e){tx=(e.clientX/innerWidth-.5)*9;ty=(e.clientY/innerHeight-.5)*6;},{passive:true});
+    function place(now){
+      if(!last)last=now; var dt=Math.min(.05,(now-last)/1000); last=now; t+=dt;
+      px+=(tx-px)*.04; py+=(ty-py)*.04;
+      stage.style.transform='rotateY('+px.toFixed(2)+'deg) rotateX('+(-py).toFixed(2)+'deg)';
+      var vh=innerHeight, span=vh*1.2, i, b;
+      for(i=0;i<birds.length;i++){
+        b=birds[i]; var v=((t*VS+b.u)%1+1)%1;
+        var th=TWIST*v + t*ROT + b.u*0.6, R=b.R*(1+b.tw);
+        var x=R*Math.sin(th), z=R*Math.cos(th), y=vh*0.60 - v*span;
+        var depth=(z+b.rz)/(2*b.rz);
+        var edge=Math.min(1, v*9, (1-v)*9);
+        var o=((0.40+0.55*depth)*edge).toFixed(3);
+        var blur=((1-depth)*1.6).toFixed(1);
+        var yaw=(Math.sin(t*0.5+b.ph)*12-6).toFixed(1);
+        var bank=(Math.sin(t*0.7+b.ph)*6).toFixed(1);
+        b.el.style.opacity=o;
+        b.el.style.filter='drop-shadow(0 0 6px rgba(70,120,255,.5)) blur('+blur+'px)';
+        b.el.style.transform='translate(-50%,-50%) translate3d('+x.toFixed(1)+'px,'+y.toFixed(1)+'px,'+z.toFixed(1)+'px) rotateY('+yaw+'deg) rotateZ('+bank+'deg)';
+      }
+    }
+    if(reduce){ place(performance.now()); }
+    else { (function loop(now){ requestAnimationFrame(loop); place(now); })(performance.now()); }
+  })();
 })();
 </script>
 </body>
