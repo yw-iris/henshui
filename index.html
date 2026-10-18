@@ -276,10 +276,13 @@
   .rules li b{color:#a9bfff;font-weight:500}
 
   .cards-note{font-size:11.5px;color:var(--mist);letter-spacing:.26em;margin-bottom:20px}
-  .cards{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px}
-  .card{display:inline-block;text-decoration:none;font-size:12px;letter-spacing:.16em;padding:11px 24px;border:1px solid var(--line);border-radius:40px;
+  .cards{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+  .card{display:inline-flex;align-items:center;justify-content:center;gap:.5em;text-decoration:none;font-size:14px;letter-spacing:.16em;padding:14px 32px;border:1px solid var(--line);border-radius:40px;
     color:rgba(232,238,255,.86);background:rgba(20,50,150,.28);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
     transition:.4s}
+  .card::before{content:"";width:1.05em;height:1.05em;border-radius:50%;flex:none;
+    background:radial-gradient(circle at 35% 30%,#bcd0ff 0%,#6f93ff 45%,#2747c4 100%);
+    box-shadow:0 0 12px rgba(90,130,255,.6)}
   .card:hover{border-color:rgba(138,167,255,.55);color:#fff;box-shadow:0 0 26px rgba(70,110,255,.35);transform:translateY(-2px)}
   .outro-line{font-family:"Noto Serif SC",serif;font-size:clamp(19px,3vw,28px);color:#e2e9ff;margin-top:58px;
     letter-spacing:.12em;text-shadow:0 1px 2px rgba(0,8,31,.45),0 3px 34px rgba(0,8,31,.7)}
@@ -319,6 +322,9 @@
     .rules li::before{top:11px;font-size:11px}
     .outro-line{margin-top:40px;font-size:clamp(18px,5.4vw,22px)}
     .made{margin-top:34px;font-size:10.5px;letter-spacing:.16em}
+    .cards{gap:9px;margin-top:16px}
+    .card{font-size:13.5px;padding:12px 18px;letter-spacing:.08em}
+    .card::before{width:.95em;height:.95em}
     #stage{height:min(48vh,380px);width:min(48vh,380px);margin:10px 0 6px}
     .cover-title{font-size:clamp(48px,15vw,72px);letter-spacing:.1em;text-indent:.1em}
     .cover-en{letter-spacing:.5em;text-indent:.5em}
@@ -350,7 +356,7 @@
     .rules li::before{top:15px;font-size:13px}
     .outro-line{font-size:30px}
     .cards-note{font-size:12.5px}
-    .card{font-size:13px;padding:12px 28px}
+    .card{font-size:15px;padding:15px 34px}
     #hud{font-size:14px}#hud b{font-size:23px}
   }
 
