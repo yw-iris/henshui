@@ -41,17 +41,17 @@
 
   /* ---------- 海面：底图一，固定于视口底部，缓慢呼吸 ---------- */
   #sea{
-    position:fixed;left:0;right:0;bottom:0;height:66vh;z-index:-2;
+    position:fixed;left:0;right:0;bottom:0;height:78vh;z-index:-2;
     background-image:var(--sea-img);
     background-position:center bottom;background-size:cover;background-repeat:no-repeat;
-    opacity:0;transform:translateY(40px) scale(1.04);
-    filter:brightness(.72) contrast(1.08) saturate(1.04);
+    opacity:0;transform:translateY(40px) scale(1.05);
+    filter:brightness(.9) contrast(1.05) saturate(1.06);
     transition:opacity 2.4s ease .5s,transform 2.8s cubic-bezier(.16,.8,.24,1) .5s;
-    -webkit-mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.5) 34%,#000 68%,#000 100%);
-    mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.5) 34%,#000 68%,#000 100%);
+    -webkit-mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.55) 30%,#000 64%,#000 100%);
+    mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.55) 30%,#000 64%,#000 100%);
     will-change:transform;
   }
-  body.entered #sea{opacity:.40;transform:translateY(0) scale(1.04)}
+  body.entered #sea{opacity:.72;transform:translateY(0) scale(1.05)}
   #veil{position:fixed;inset:0;z-index:-1;pointer-events:none;
     background:
       radial-gradient(126% 64% at 50% 44%, rgba(0,9,38,.66) 0%, rgba(0,9,38,.26) 56%, transparent 80%),
@@ -203,13 +203,15 @@
   /* 章节间视觉带：底图二，整版图块 */
   #band{position:relative;width:min(1080px,90vw);height:min(72vh,660px);min-height:400px;
     margin:16vh auto;overflow:hidden;z-index:1;border:1px solid rgba(140,170,255,.14)}
-  #band::before{content:"";position:absolute;inset:0;background-image:var(--sea-img);
-    background-position:center bottom;background-size:cover;background-repeat:no-repeat;opacity:.85;
-    filter:brightness(.82) contrast(1.06) saturate(1.05)}
+  #band::before{content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(130% 100% at 28% 16%, rgba(46,86,232,.52) 0%, rgba(18,40,176,.30) 46%, rgba(4,14,66,.12) 100%);
+    opacity:.92}
   #band::after{content:"";position:absolute;inset:0;
     background:
-      linear-gradient(90deg,rgba(0,8,32,.95) 0%,rgba(0,8,32,.78) 34%,rgba(0,8,32,.32) 58%,rgba(0,8,32,.34) 100%),
-      linear-gradient(180deg,rgba(0,8,32,.5) 0%,rgba(0,8,32,.08) 28%,rgba(0,8,32,.08) 70%,rgba(0,8,32,.7) 100%)}
+      linear-gradient(90deg,rgba(0,8,32,.82) 0%,rgba(0,8,32,.58) 34%,rgba(0,8,32,.16) 58%,rgba(0,8,32,.18) 100%),
+      linear-gradient(180deg,rgba(0,8,32,.42) 0%,rgba(0,8,32,.04) 30%,rgba(0,8,32,.04) 68%,rgba(0,8,32,.55) 100%),
+      radial-gradient(90% 70% at 24% 18%,rgba(60,104,255,.22) 0%,rgba(60,104,255,0) 60%)}
   #band .inner{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;
     justify-content:center;padding:0 clamp(28px,7vw,88px)}
   #band .interlude{max-width:60%}
