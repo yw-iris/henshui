@@ -202,16 +202,7 @@
 
   /* 章节间视觉带：底图二，整版图块 */
   #band{position:relative;width:min(1080px,90vw);height:min(72vh,660px);min-height:400px;
-    margin:16vh auto;overflow:hidden;z-index:1;border:1px solid rgba(140,170,255,.14)}
-  #band::before{content:"";position:absolute;inset:0;
-    background:
-      radial-gradient(130% 100% at 28% 16%, rgba(46,86,232,.52) 0%, rgba(18,40,176,.30) 46%, rgba(4,14,66,.12) 100%);
-    opacity:.92}
-  #band::after{content:"";position:absolute;inset:0;
-    background:
-      linear-gradient(90deg,rgba(0,8,32,.82) 0%,rgba(0,8,32,.58) 34%,rgba(0,8,32,.16) 58%,rgba(0,8,32,.18) 100%),
-      linear-gradient(180deg,rgba(0,8,32,.42) 0%,rgba(0,8,32,.04) 30%,rgba(0,8,32,.04) 68%,rgba(0,8,32,.55) 100%),
-      radial-gradient(90% 70% at 24% 18%,rgba(60,104,255,.22) 0%,rgba(60,104,255,0) 60%)}
+    margin:16vh auto;overflow:hidden;z-index:1}
   #band .inner{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;
     justify-content:center;padding:0 clamp(28px,7vw,88px)}
   #band .interlude{max-width:60%}
@@ -254,7 +245,6 @@
     #hud{right:16px;bottom:16px}#sound{left:16px;bottom:16px}#spine{display:none}
     #sea{height:58vh}
     #band{width:92vw;height:56vh;margin:10vh auto 178px;overflow:visible}
-    #band::after{background:linear-gradient(180deg,rgba(0,8,32,.08) 0%,rgba(0,8,32,.2) 55%,rgba(0,8,32,.55) 100%)}
     #band .inner{position:absolute;top:calc(100% + 26px);left:0;right:0;height:auto;
       display:block;padding:0 4vw}
     .interlude{font-size:clamp(19px,5vw,26px);max-width:100%}
