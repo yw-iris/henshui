@@ -615,6 +615,7 @@ Not until I met you did I call it fate</pre>
     document.body.classList.add('entered');
     started=true;
     showPage(0);
+    startBGM();   /* 进入即起播（enter 由用户手势触发，满足自动播放策略） */
     setTimeout(function(){ cover.style.display='none'; },1400);
   }
   cover.addEventListener('pointerdown',enter);
@@ -713,14 +714,17 @@ Not until I met you did I call it fate</pre>
   /* ---------- 背景音乐（BGM） ---------- */
   var btn=document.getElementById('sound'), bgm=document.getElementById('bgm'), on=false;
   bgm.volume=0.55;
+  function startBGM(){
+    if(on) return;
+    on=true; btn.classList.add('on');
+    var p=bgm.play();
+    if(p&&p.catch){ p.catch(function(){ on=false; btn.classList.remove('on'); }); }
+  }
+  function stopBGM(){
+    on=false; btn.classList.remove('on'); bgm.pause();
+  }
   btn.addEventListener('click',function(){
-    if(!on){
-      on=true; btn.classList.add('on');
-      var p=bgm.play();
-      if(p&&p.catch){ p.catch(function(){ on=false; btn.classList.remove('on'); }); }
-    } else {
-      on=false; btn.classList.remove('on'); bgm.pause();
-    }
+    if(!on) startBGM(); else stopBGM();
   });
 
   /* ---------- 里页飞鸟环绕：真实白鸟（取自原图）整齐螺旋上升 3D 鸟群 ---------- */
